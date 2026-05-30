@@ -427,13 +427,7 @@ static void lua55ReplyToServerReplyDepth(ValkeyModuleCtx *ctx, int resp_version,
                                          lua_State *lua, int depth) {
   int t = lua_type(lua, -1);
 
-  if (depth >= LUA55_MAX_REPLY_DEPTH) {
-    ValkeyModule_ReplyWithError(ctx, "ERR reached lua reply nesting limit");
-    lua_pop(lua, 1);
-    return;
-  }
-
-  if (!lua_checkstack(lua, 4)) {
+  if (depth >= LUA55_MAX_REPLY_DEPTH || !lua_checkstack(lua, 4)) {
     ValkeyModule_ReplyWithError(ctx, "ERR reached lua stack limit");
     lua_pop(lua, 1);
     return;

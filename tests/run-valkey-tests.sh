@@ -56,7 +56,6 @@ EXTRA_SKIP_ARGS=(
     "--skiptest" "/Globals protection"
     "--skiptest" "/Test scripting debug"
     "--skiptest" "Verify execution of prohibit dangerous Lua methods will fail"
-    "--skiptest" "Script return recursive object"
     "--skiptest" "/cmsgpack can pack and unpack circular references"
     "--skiptest" "/Active Defrag eval scripts"
     "--skiptest" "CONFIG sanity"
