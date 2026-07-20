@@ -35,8 +35,3 @@ Produces `build/libvalkeylua55.so`.
 ```
 loadmodule /path/to/libvalkeylua55.so
 ```
-
-## Repository
-
-- Source: https://github.com/secwall/valkey-lua55
-- License: BSD-3-Clause (module); MIT (bundled Lua 5.5 sources under `deps/lua/`)
