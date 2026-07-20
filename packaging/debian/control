@@ -1,0 +1,22 @@
+Source: valkey-lua55
+Section: database
+Priority: optional
+Maintainer: Valkey Contributors <valkey@lists.valkey.io>
+Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.13),
+               gcc,
+               make
+Standards-Version: 4.6.2
+Homepage: https://github.com/secwall/valkey-lua55
+Rules-Requires-Root: no
+
+Package: valkey-lua55
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: valkey-server (>= 9.1) | valkey (>= 9.1)
+Description: Lua 5.5 scripting engine module for Valkey
+ A Lua 5.5 scripting engine module for Valkey that provides EVAL,
+ EVALSHA, FUNCTION, and SCRIPT commands backed by an embedded Lua 5.5
+ interpreter. Uses a per-user architecture where each authenticated user
+ gets their own pair of lua_State instances, eliminating the need for
+ readonly-table protection.

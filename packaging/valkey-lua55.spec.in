@@ -1,0 +1,47 @@
+%global upstream_version #[VERSION]
+%global valkey_modules_dir %{_libdir}/valkey/modules
+%global debug_package %{nil}
+
+Name:           #[PKG_NAME]
+Version:        #[RPM_VERSION]
+Release:        1%{dist}
+Summary:        Lua 5.5 scripting engine module for Valkey
+
+License:        BSD-3-Clause
+
+URL:            https://github.com/secwall/valkey-lua55
+Source:         valkey-lua55-%{upstream_version}.tar.gz
+
+BuildRequires:  gcc
+BuildRequires:  cmake >= 3.13
+BuildRequires:  make
+
+Recommends:     valkey >= 9.1
+
+%global _description %{expand:
+A Lua 5.5 scripting engine module for Valkey that provides EVAL,
+EVALSHA, FUNCTION, and SCRIPT commands backed by an embedded Lua 5.5
+interpreter. Uses a per-user architecture where each authenticated user
+gets their own pair of lua_State instances, eliminating the need for
+readonly-table protection.}
+
+%description %{_description}
+
+%prep
+%autosetup -n valkey-lua55-%{upstream_version} -p1
+
+%build
+mkdir -p build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+%make_build
+
+%install
+install -pDm755 build/libvalkeylua55.so -t %{buildroot}%{valkey_modules_dir}
+
+%files
+%{valkey_modules_dir}/libvalkeylua55.so
+%license LICENSE
+%doc README.md
+
+%changelog
